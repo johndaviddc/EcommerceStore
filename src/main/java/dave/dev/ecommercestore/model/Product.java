@@ -3,26 +3,22 @@ package dave.dev.ecommercestore.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
+    private String category;
     private double price;
 
-    public Product(Long id, String name, double price) {
+    public Product(Long id, String name, String category, double price) {
         this.id = id;
         this.name = name;
+        this.category = category;
         this.price = price;
     }
 
     public Product() {
-
     }
 
     public Long getId() {
@@ -39,6 +35,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getPrice() {

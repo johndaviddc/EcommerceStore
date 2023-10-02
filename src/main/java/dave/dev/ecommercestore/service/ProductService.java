@@ -1,5 +1,6 @@
 package dave.dev.ecommercestore.service;
 
+import dave.dev.ecommercestore.dto.ProductDTO;
 import dave.dev.ecommercestore.model.Product;
 import dave.dev.ecommercestore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,28 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
-    public Product createProduct(Product product) {
+    public Product createProduct(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setCategory(productDTO.getCategory());
+        product.setPrice(productDTO.getPrice());
+
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Long id, Product product) {
-        if (productRepository.existsById(id)) {
-            product.setId(id);
-            return productRepository.save(product);
-        } else {
-            throw new RuntimeException("Product not found");
-        }
+    public Product updateProduct(Long id, ProductDTO productDTO) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Update the properties of the existing Product with values from the ProductDTO
+        existingProduct.setName(productDTO.getName());
+        existingProduct.setCategory(productDTO.getCategory());
+        existingProduct.setPrice(productDTO.getPrice());
+
+        // Save the updated product
+        return productRepository.save(existingProduct);
     }
+
 
     public void deleteProduct(Long id) {
         if (productRepository.existsById(id)) {

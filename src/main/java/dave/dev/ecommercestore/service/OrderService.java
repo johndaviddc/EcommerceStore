@@ -1,5 +1,6 @@
 package dave.dev.ecommercestore.service;
 
+import dave.dev.ecommercestore.dto.OrderDTO;
 import dave.dev.ecommercestore.model.Order;
 import dave.dev.ecommercestore.model.OrderItem;
 import dave.dev.ecommercestore.model.Product;
@@ -21,9 +22,14 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    public Order createOrder(Order order) {
+    public Order createOrder(OrderDTO orderDTO) {
+        Order order = new Order();
+        // Set properties of the Order object based on the OrderDTO
+        order.setSomeProperty(orderDTO.getSomeProperty());
+        // Save the order
         return orderRepository.save(order);
     }
+
 
     public Order addOrderItem(Long orderId, Long productId, int quantity) {
         // Retrieve the order

@@ -1,29 +1,24 @@
 package dave.dev.ecommercestore.dto;
 
-import java.util.List;
 
 public class CartDTO {
-    private Long id;
-    private List<CartItemDTO> cartItems;
+    private Long productId;
+    private int quantity;
 
-    public CartDTO(Long id, List<CartItemDTO> cartItems) {
-        this.id = id;
-        this.cartItems = cartItems;
+    // Getter and setter methods for productId and quantity
+    public Long getProductId() {
+        return productId;
     }
 
-    public Long getId() {
-        return id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public List<CartItemDTO> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(List<CartItemDTO> cartItems) {
-        this.cartItems = cartItems;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
