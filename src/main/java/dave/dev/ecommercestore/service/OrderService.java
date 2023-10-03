@@ -30,6 +30,45 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order updateOrder(Long id, OrderDTO orderDTO) {
+        // Retrieve the existing order from the database
+        Order existingOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        // Apply changes from the OrderDTO to the existing order
+        // For example, if your OrderDTO has properties like orderItems and totalAmount,
+        // you can update them like this:
+
+        // Update order items if needed
+        // existingOrder.setOrderItems(orderDTO.getOrderItems());
+
+        // Update total amount if needed
+        // existingOrder.setTotalAmount(orderDTO.getTotalAmount());
+
+        // Save the updated order back to the database
+        Order updatedOrder = orderRepository.save(existingOrder);
+
+        return updatedOrder;
+    }
+
+    public void cancelOrder(Long id) {
+        // Retrieve the existing order from the database
+        Order existingOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        // Check if the order is in a cancelable state (e.g., it's not already canceled)
+        if (!existingOrder.getStatus().equals("Canceled")) {
+            // Update the status of the order to "Canceled"
+            existingOrder.setStatus("Canceled");
+
+            // Save the updated order back to the database
+            orderRepository.save(existingOrder);
+        } else {
+            // Handle the case where the order is already canceled
+            throw new RuntimeException("Order is already canceled");
+        }
+    }
+
 
     public Order addOrderItem(Long orderId, Long productId, int quantity) {
         // Retrieve the order
