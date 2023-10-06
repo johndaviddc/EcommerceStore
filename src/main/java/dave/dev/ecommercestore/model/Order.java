@@ -36,6 +36,28 @@ public class Order {
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
+
         this.orderItems = orderItems;
+    }
+
+    public OrderItem findOrderItemByProductId(Long productId) {
+        for (OrderItem item : orderItems) {
+            if (item.getProduct().getId().equals(productId)) {
+                return item; // Found the order item with the specified product ID
+            }
+        }
+        return null;
+    }
+
+    public double calculateTotal() {
+        double totalAmount = 0.0;
+
+        // Iterate over the order items and calculate the total amount
+        for (OrderItem item : orderItems) {
+            double itemTotal = item.getQuantity() * item.getProduct().getPrice();
+            totalAmount += itemTotal;
+        }
+
+        return totalAmount;
     }
 }
