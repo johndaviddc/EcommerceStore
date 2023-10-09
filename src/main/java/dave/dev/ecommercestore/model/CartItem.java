@@ -30,6 +30,10 @@ public class CartItem {
 
     }
 
+    public double getTotalPrice() {
+        return product.getPrice() * quantity;
+    }
+
     public Long getId() {
         return id;
     }

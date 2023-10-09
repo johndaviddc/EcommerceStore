@@ -49,7 +49,7 @@ public class Order {
         return null;
     }
 
-    public double calculateTotal() {
+    public void calculateTotal() {
         double totalAmount = 0.0;
 
         // Iterate over the order items and calculate the total amount
@@ -58,6 +58,5 @@ public class Order {
             totalAmount += itemTotal;
         }
 
-        return totalAmount;
     }
 }

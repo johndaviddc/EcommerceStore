@@ -61,5 +61,10 @@ public class Cart {
         this.totalAmount = total;
     }
 
+    public List<CartItem> getItems() {
+        return items;
+    }
+
+
 
 }
