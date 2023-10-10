@@ -69,7 +69,6 @@ public class OrderService {
         }
     }
 
-
     public Order addOrderItem(Long orderId, Long productId, int quantity) {
         // Retrieve the order
         Order order = getOrderById(orderId);
@@ -77,7 +76,7 @@ public class OrderService {
         // Retrieve the product
         Product product = productService.getProductById(productId);
 
-        // Check id the product exists in the order
+        // Check if the product exists in the order
         OrderItem existingItem = order.findOrderItemByProductId(productId);
 
         if (existingItem != null) {
@@ -104,7 +103,7 @@ public class OrderService {
         Order order = getOrderById(orderId);
 
         // Find the order item for the specified product and remove it
-        OrderItem itemToRemove = order.findOrderItemByProduct(productId);
+        OrderItem itemToRemove = order.findOrderItemByProductId(productId);
 
         if (itemToRemove != null) {
             order.getOrderItems().remove(itemToRemove);
