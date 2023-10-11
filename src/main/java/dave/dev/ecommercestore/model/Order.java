@@ -14,13 +14,26 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    public Order(Long id, List<OrderItem> orderItems) {
+    private double totalAmount; // Add totalAmount property
+    private String status; // Add status property
+    private String someProperty;
+
+    public Order(Long id, List<OrderItem> orderItems, String someProperty) {
         this.id = id;
         this.orderItems = orderItems;
+        this.someProperty = someProperty;
     }
 
     public Order() {
 
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public Long getId() {
@@ -36,7 +49,6 @@ public class Order {
     }
 
     public void setOrderItems(List<OrderItem> orderItems) {
-
         this.orderItems = orderItems;
     }
 
@@ -58,5 +70,22 @@ public class Order {
             totalAmount += itemTotal;
         }
 
+        this.totalAmount = totalAmount; // Set the total amount property
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSomeProperty() {
+        return someProperty;
+    }
+
+    public void setSomeProperty(String someProperty) {
+        this.someProperty = someProperty;
     }
 }

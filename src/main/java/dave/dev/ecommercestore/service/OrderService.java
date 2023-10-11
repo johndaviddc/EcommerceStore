@@ -24,8 +24,12 @@ public class OrderService {
 
     public Order createOrder(OrderDTO orderDTO) {
         Order order = new Order();
+
         // Set properties of the Order object based on the OrderDTO
         order.setSomeProperty(orderDTO.getSomeProperty());
+        order.setTotalAmount(0.0); // Initialize totalAmount to 0.0
+        order.setStatus("Pending"); // Initialize status to "Pending"
+
         // Save the order
         return orderRepository.save(order);
     }
@@ -69,7 +73,11 @@ public class OrderService {
         }
     }
 
-    public Order addOrderItem(Long orderId, Long productId, int quantity) {
+    public Order addOrderItem(Long orderId, OrderDTO orderDTO) {
+        // Extract the required values from the OrderDTO
+        Long productId = orderDTO.getProductId();
+        int quantity = orderDTO.getQuantity();
+
         // Retrieve the order
         Order order = getOrderById(orderId);
 
